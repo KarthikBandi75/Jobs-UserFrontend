@@ -16,7 +16,7 @@ const VerifyOtp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5577/api/user/verify-otp', { email, otp });
+      const res = await axios.post(`https://jobs-backend-47u0.onrender.com/api/user/verify-otp`, { email, otp });
       if (res.data.success) {
         localStorage.setItem('token',res.data.token);
        setToken(res.data.token);

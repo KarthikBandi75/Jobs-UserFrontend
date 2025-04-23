@@ -17,7 +17,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5577/api/user/signup', formData);
+      const res = await axios.post(`https://jobs-backend-47u0.onrender.com/api/user/signup`, formData);
       if (res.data.success) {
         localStorage.setItem('email', formData.email);
         toast.success("Signup successful. Please verify OTP.");

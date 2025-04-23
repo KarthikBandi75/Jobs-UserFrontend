@@ -13,7 +13,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5577/api/user/login', { email });
+      const res = await axios.post(`https://jobs-backend-47u0.onrender.com/api/user/login`, { email });
       if (res.data.success) {
         localStorage.setItem('email', email);
         toast.success("OTP sent to your email");

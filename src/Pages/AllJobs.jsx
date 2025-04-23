@@ -19,7 +19,7 @@ const AllJobs = () => {
 
   const getAllJobs = async () => {
     try {
-      const response = await axios.get("http://localhost:5577/api/jobs/", {
+      const response = await axios.get(`https://jobs-backend-47u0.onrender.com/api/jobs/`, {
         headers: { token: token },
       });
       const activeJobs = response.data.jobs.filter((job) => job.isActive);

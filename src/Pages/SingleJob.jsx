@@ -34,7 +34,7 @@ const SingleJob = () => {
 
   const getJob = async () => {
     try {
-      const res = await axios.get(`http://localhost:5577/api/user/job/${id}`, {
+      const res = await axios.get(`https://jobs-backend-47u0.onrender.com/api/user/job/${id}`, {
         headers: { token },
       });
       if (res.data.success) {
@@ -57,7 +57,7 @@ const SingleJob = () => {
   const applyJob = async () => {
     try {
       const res = await axios.post(
-        `http://localhost:5577/api/applications/apply/${id}`,
+        `https://jobs-backend-47u0.onrender.com/api/applications/apply/${id}`,
         {},
         { headers: { token } }
       );

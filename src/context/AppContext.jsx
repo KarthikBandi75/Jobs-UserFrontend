@@ -12,7 +12,7 @@ const AuthProvider = ({ children }) => {
 
   const loadUserProfileData = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5577/api/user/profile", {
+      const { data } = await axios.get(`https://jobs-backend-47u0.onrender.com/api/user/profile`, {
         headers: {
           token: token,
         },

@@ -212,7 +212,7 @@ const Profile = () => {
       }
      
       const response = await axios.put(
-        "http://localhost:5577/api/user/profile",
+        `https://jobs-backend-47u0.onrender.com/api/user/profile`,
         data,
         {
           headers: {

@@ -23,7 +23,6 @@ const Navbar = () => {
     { to: "/alljobs", label: "All Jobs" },
     { to: "/about", label: "About" },
     { to: "/contact", label: "Contact" },
-    {to:"http://localhost:5173/login", label:"Admin/Employe DashBoard"}
   ];
 
   // Optional: Close dropdown when clicking outside

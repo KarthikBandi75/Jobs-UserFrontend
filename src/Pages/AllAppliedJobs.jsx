@@ -11,7 +11,7 @@ const AllAppliedJobs = () => {
 
   const fetchApplications = async () => {
     try {
-      const res = await axios.get("http://localhost:5577/api/applications/user", {
+      const res = await axios.get(`https://jobs-backend-47u0.onrender.com/api/applications/user`, {
         headers: { token },
       });
       if (res.data.success) {
@@ -30,7 +30,7 @@ const AllAppliedJobs = () => {
   const handleWithdraw = async (jobId) => {
     try {
       const res = await axios.delete(
-        `http://localhost:5577/api/applications/withdraw/${jobId}`,
+        `https://jobs-backend-47u0.onrender.com/api/applications/withdraw/${jobId}`,
         { headers: { token } }
       );
       if (res.data.success) {
