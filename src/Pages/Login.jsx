@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate,Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { toast } from 'react-toastify';
 import Input from '../components/Input';
@@ -8,10 +8,12 @@ import { Mail } from 'lucide-react';
 
 const Login = () => {
   const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false); 
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const res = await axios.post(`https://jobs-backend-47u0.onrender.com/api/user/login`, { email });
       if (res.data.success) {
@@ -21,6 +23,8 @@ const Login = () => {
       }
     } catch (err) {
       toast.error(err.response?.data?.message || 'Login failed');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -45,19 +49,34 @@ const Login = () => {
           />
           <motion.button
             type="submit"
-            className="w-full py-3 font-bold bg-purple-500 rounded-xl hover:bg-purple-600 cursor-pointer"
+            disabled={loading}
+            className={`w-full py-3 font-bold rounded-xl transition duration-300 ${
+              loading
+                ? 'bg-purple-400 cursor-not-allowed'
+                : 'bg-purple-500 hover:bg-purple-600 cursor-pointer'
+            }`}
           >
-            Send OTP
+            {loading ? (
+              <motion.div
+                className="flex justify-center items-center gap-2"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+              >
+                <motion.div className="w-4 h-4 rounded-full border-2 border-t-white border-purple-200 animate-spin" />
+                Sending...
+              </motion.div>
+            ) : (
+              'Send OTP'
+            )}
           </motion.button>
         </form>
-     
-        <p className="mt-6 text-center text-sm text-gray-300">
-  Don't have an account?{' '}
-  <Link to="/signup" className="text-purple-400 hover:text-purple-500 underline">
-    Sign up
-  </Link>
-</p>
 
+        <p className="mt-6 text-center text-sm text-gray-300">
+          Don't have an account?{' '}
+          <Link to="/signup" className="text-purple-400 hover:text-purple-500 underline">
+            Sign up
+          </Link>
+        </p>
       </motion.div>
     </div>
   );
