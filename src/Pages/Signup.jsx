@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 const Signup = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ name: '', email: '', password: '' });
+  const [loading, setLoading] = useState(false); // 🔹 Track loading state
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -16,6 +17,7 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Start loading
     try {
       const res = await axios.post(`https://jobs-backend-47u0.onrender.com/api/user/signup`, formData);
       if (res.data.success) {
@@ -25,6 +27,8 @@ const Signup = () => {
       }
     } catch (err) {
       toast.error(err.response?.data?.message || 'Signup failed');
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
 
@@ -69,25 +73,43 @@ const Signup = () => {
 
           <motion.button
             type="submit"
-            className="w-full py-3 font-bold bg-purple-500 rounded-xl hover:bg-purple-600 cursor-pointer"
+            disabled={loading}
+            className={`w-full py-3 font-bold rounded-xl transition duration-300 ${
+              loading
+                ? 'bg-purple-400 cursor-not-allowed'
+                : 'bg-purple-500 hover:bg-purple-600 cursor-pointer'
+            }`}
           >
-            Sign Up
+            {loading ? (
+              <motion.div
+                className="flex justify-center items-center gap-2"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+              >
+                <motion.div
+                  className="w-4 h-4 rounded-full border-2 border-t-white border-purple-200 animate-spin"
+                />
+                Signing Up...
+              </motion.div>
+            ) : (
+              'Sign Up'
+            )}
           </motion.button>
         </form>
 
         <div className="mt-6 space-y-2 text-center text-sm text-gray-300">
-  <p>
-    Already have an account?{' '}
-    <Link to="/login" className="text-purple-400 hover:text-purple-500 underline">
-      Login here
-    </Link>
-  </p>
-  <p>
-    <Link to="/" className="text-purple-400 hover:text-purple-500 underline">
-      Go to Homepage
-    </Link>
-  </p>
-</div>
+          <p>
+            Already have an account?{' '}
+            <Link to="/login" className="text-purple-400 hover:text-purple-500 underline">
+              Login here
+            </Link>
+          </p>
+          <p>
+            <Link to="/" className="text-purple-400 hover:text-purple-500 underline">
+              Go to Homepage
+            </Link>
+          </p>
+        </div>
       </motion.div>
     </div>
   );
