@@ -77,6 +77,18 @@ const Login = () => {
             Sign up
           </Link>
         </p>
+
+        <div className="mt-2 text-center">
+                    <p>
+                        Admin Login?{" "}   
+                        <span
+                            className="text-blue-400 cursor-pointer hover:underline"
+                          
+                        >
+<a href="https://jobs-admin-employee-frontend.vercel.app/login" >Click Here</a>
+                        </span>
+                    </p>
+                </div>
       </motion.div>
     </div>
   );
